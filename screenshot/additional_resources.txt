@@ -1,9 +1,12 @@
-* Additional Resources:
+# Additional Resources:
 
+##SIEM Tooling:
+Alienvault  [FREE]
+SELKS       [FREE]
+Splunk      [LIMITED DATA]
+Arcsight    [PAID]
 
-Alienvault
-SELKS
-
-Bro
-Fail2ban
-Tripwire
+##Open-source security scripts
+Bro         [FREE]
+Fail2ban    [FREE]
+Tripwire    [FREE]
