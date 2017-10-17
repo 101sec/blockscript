@@ -72,6 +72,6 @@ To further simplefy things we could create a bash alias in ~/.bashrc or ~/.bash_
 
 alias block='/usr/local/bin/addenemy'
 
-To block an IP-address from the terminal, we could simply issue:
+To block an IP-address from the terminal, we could then simply issue:
 
 block [IP-Address]
