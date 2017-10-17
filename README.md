@@ -46,4 +46,5 @@ Blockscript consists of two parts. The first part fetches threat information fro
 
 # Add a cronjob to fetch feeds automatically
 0 */2 * * * /opt/custom/blockscript/fetch_feeds.sh
+
 30 23  * * * /opt/custom/blockscript/add_enemies.sh
