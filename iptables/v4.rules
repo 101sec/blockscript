@@ -1,0 +1,71 @@
+#
+# Example fast and scalable firewall configuration with iptables based on the work of Lammert Bies.
+# Please only implement if you fully understand the functionality
+# because is very easy to lockout yourself from your computer if
+# the script isn't adapted to your specific situation.
+#
+
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+:Always - [0:0]
+:Allow - [0:0]
+:Bogus - [0:0]
+:Enemies - [0:0]
+:Friends - [0:0]
+
+-A INPUT -j Bogus
+-A INPUT -j Always
+-A INPUT -j Enemies
+-A INPUT -j Allow
+
+-A FORWARD -j Bogus
+-A FORWARD -j Always
+-A FORWARD -j Enemies
+-A FORWARD -j Allow
+
+-A Bogus -p tcp -m tcp --tcp-flags SYN,FIN SYN,FIN -j DROP
+-A Bogus -p tcp -m tcp --tcp-flags SYN,RST SYN,RST -j DROP
+-A Bogus -s 169.254.0.0/16 -j DROP
+-A Bogus -s 172.16.0.0/12 -j DROP
+# Please exclude your own IP-range by uncommenting if locked out.
+-A Bogus -s 192.0.2.0/24 -j DROP
+-A Bogus -s 192.168.0.0/24 -j DROP
+-A Bogus -s 10.0.0.0/8 -j DROP
+-A Bogus -s 127.0.0.0/8 ! -i lo -j DROP
+
+# For high priority services we can accept all traffic on a given port and protocol.
+-A Always -p udp --dport 123 -j ACCEPT
+-A Always -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A Always -i lo -j ACCEPT
+
+# Example of adding a lab computer to the Friends list
+#-A Friends -s 192.168.1.126 -j ACCEPT
+-A Friends -j DROP
+
+# Blocking enemies based on behaviour. Certain ports are not allowed to be touched.
+-A Enemies  -m recent --name psc --update --seconds 60 -j DROP
+-A Enemies  -m tcp -p tcp --dport 1433  -m recent --name psc --set ! -i lo -j DROP
+-A Enemies  -m tcp -p tcp --dport 3306  -m recent --name psc --set ! -i lo -j DROP
+-A Enemies  -m tcp -p tcp --dport 8086  -m recent --name psc --set ! -i lo -j DROP
+-A Enemies  -m tcp -p tcp --dport 10000 -m recent --name psc --set ! -i lo -j DROP
+
+# Blocking enemies on an IP-basis is simple
+-A Enemies -s 99.99.99.99 -j DROP
+-A Enemies -s 173.239.79.210 -j DROP
+-A Enemies -s 95.211.224.12 -j DROP
+
+# We only want to signal to our friends that we are on the network.
+-A Allow -p icmp --icmp-type echo-request -j Friends
+-A Allow -p icmp --icmp-type echo-reply -j Friends
+-A Allow -p icmp --icmp-type any -m limit --limit 1/second -j ACCEPT
+-A Allow -p icmp --icmp-type any -j DROP
+# Allowing ports and protocols is easy. In this case we need SSL (443), HTTP (80), a custom port to connect to a labcomputer (1514) and our mailserver (25) excluded. 
+-A Allow -p udp -m state --state NEW -m udp --dport 1514 -j Friends
+-A Allow -p tcp -m state --state NEW -m tcp --dport 25 -j ACCEPT
+-A Allow -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+-A Allow -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT
+-A Allow -j DROP
+
+COMMIT
