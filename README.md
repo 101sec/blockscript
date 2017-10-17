@@ -45,6 +45,13 @@ Blockscript consists of two parts. The first part fetches threat information fro
 
 
 # Add a cronjob to fetch feeds automatically
+
+sudo crontab -e
+
+Add the following lines:
+
 0 */2 * * * /opt/custom/blockscript/fetch_feeds.sh
 
-30 23  * * * /opt/custom/blockscript/add_enemies.sh
+30 23 * * * /opt/custom/blockscript/add_enemies.sh
+
+Per this entry, cron will frequently fetch the latest info without DOS'ing the servers and run add_enemies.sh at 23:30 (11.30pm) once a day, every day. 
