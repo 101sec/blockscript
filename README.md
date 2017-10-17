@@ -20,6 +20,7 @@ sudo git clone https://github.com/101sec/blockscript.git;
 cd blockscript; 
 
 You may need to customize the firewall settings. The location is /opt/custom/iptables/v4.rules. 
+
 sudo leafpad /opt/custom/iptables/v4.rules;
 
 I recommend you to disable IPv6 at this moment for reasons. How to disable IPv6 on your distro may vary from my settings. If you do not know how to do this, Google is your friend :).
