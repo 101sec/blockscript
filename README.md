@@ -47,7 +47,7 @@ First of all, we need to request an API key from Autoshun. You may do so here:
 
 https://www.autoshun.org/register/
 
-Copy the API key to /opt/custom/blocklist/fetch_autoshun.sh, and paste at line 7, look for <APIKEY>.   
+Copy the API key to /opt/custom/blocklist/fetch_autoshun.sh, and paste at line 7, look for "<APIKEY>".   
 
 # Add a cronjob to fetch feeds automatically
 
