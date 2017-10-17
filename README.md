@@ -10,70 +10,73 @@ Just as Lammert, this is something I use in a slightly modified way on some of m
 
 # How to install blockscript?
 First of all we need to install a package called iptables. On debian-like distro's we can do so by entering the following command:
-
-> sudo apt-get install iptables-persistent; 
-
+```
+sudo apt-get install iptables-persistent; 
+```
 Blockscript is hardcoded to work from the /opt/custom directory. We will create this folder and navigate to the directory /opt/custom/ with the following command:
-
-> sudo mkdir /opt/custom; cd /opt/custom; 
-
+```
+sudo mkdir /opt/custom; cd /opt/custom; 
+```
 Now we are ready to clone this project with the following command:
-
+```
 sudo git clone https://github.com/101sec/blockscript.git; 
-> cd blockscript; 
-
+cd blockscript; 
+```
 You may need to customize the firewall settings. The location is /opt/custom/iptables/v4.rules. 
-
-> sudo leafpad /opt/custom/iptables/v4.rules;
-
+```
+sudo leafpad /opt/custom/iptables/v4.rules;
+```
 I recommend you to disable IPv6 at this moment for reasons. How to disable IPv6 on your distro may vary from my settings. If you do not know how to do this, Google is your friend :).
 
 When your ready to test your configuration, we can move the firewall settings to the appropriate directory.
-
-> sudo mv /opt/custom/iptables/v4.rules /etc/iptables/;
-
+```
+sudo mv /opt/custom/iptables/v4.rules /etc/iptables/;
+```
 To display the current firewall configuration
-
-> sudo iptables -L
-
+```
+sudo iptables -L
+```
 To activate the newly configurated firewall rules
-
-> sudo iptables-restore < /etc/iptables/v4.rules;
-
+```
+sudo iptables-restore < /etc/iptables/v4.rules;
+```
 Lastly we need to move the script addenemy to usr/local/bin
-
-> sudo mv /opt/custom/blockscript/addenemy /usr/local/bin/
-
+```
+sudo mv /opt/custom/blockscript/addenemy /usr/local/bin/
+```
 
 # How to use blockscript?
 Blockscript consists of two parts. The first part fetches threat information from public feeds, while the add_enemies.sh script adds them to the blocklist of our firewall configuration. Blockscript is flexible by design and can be used manually or configured to work fully automated in the background. 
-
-> sudo ./fetch_feeds - Fetches feeds from Zeus Tracker, Autoshun and others.
-
-> sudo ./add_enemies - Adds all IP-addresses from the retrieved feeds to the blocklist.
-
-> sudo ./addenemy <IP-ADDRESS> - Adds a single IP-address to the blocklist. 
-
+```
+sudo ./fetch_feeds - Fetches feeds from Zeus Tracker, Autoshun and others.
+```
+```
+sudo ./add_enemies - Adds all IP-addresses from the retrieved feeds to the blocklist.
+```
+```
+sudo ./addenemy <IP-ADDRESS> - Adds a single IP-address to the blocklist. 
+```
 First of all, we need to request an API key from Autoshun. You may do so here: https://www.autoshun.org/register/
 
 Copy the API key to /opt/custom/blocklist/fetch_autoshun.sh, and paste at line 7, look for [APIKEY].    
 
 # Add a cronjob to fetch feeds automatically
-
-> sudo crontab -e
-
+```
+sudo crontab -e
+```
 Add the following lines:
-
+```
 0 */2 * * * /opt/custom/blockscript/fetch_feeds.sh
 
 30 23 * * * /opt/custom/blockscript/add_enemies.sh
-
+```
 Per this entry, cron will frequently fetch the latest info without DOS'ing the servers and run add_enemies.sh at 23:30 (11.30pm) once a day, every day. 
 
 To further simplefy things we could create a bash alias in ~/.bashrc or ~/.bash_profile
-
+```
 alias block='/usr/local/bin/addenemy'
-
+```
 To block an IP-address from the terminal, we could then simply issue:
-
-> block [IP-Address]
+```
+block [IP-Address]
+```
