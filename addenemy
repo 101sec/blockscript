@@ -13,5 +13,4 @@ if [ $RETVAL -eq 0 ]; then
 
 fi
 echo  "${NC}[${GREEN}+${NC}] ${GREEN}Adding enemy${NC} $1";
-#echo "Adding enemy $1"
 iptables -A Enemies -s $1 -j DROP
