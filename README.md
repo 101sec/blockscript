@@ -42,7 +42,9 @@ sudo iptables-restore < /etc/iptables/v4.rules;
 Blockscript consists of two parts. The first part fetches threat information from public feeds, while the add_enemies.sh script adds them to the blocklist of our firewall configuration. Blockscript is flexible by design and can be used manually or configured to work fully automated in the background. 
 
 ./fetch_feeds - Fetches feeds from Zeus Tracker, Autoshun and others.
+
 ./add_enemies - Adds all IP-addresses from the retrieved feeds to the blocklist.
+
 ./addenemy <IP-ADDRESS> - Adds a single IP-address to the blocklist. 
 
 First of all, we need to request an API key from Autoshun. You may do so here:
