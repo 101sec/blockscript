@@ -20,4 +20,3 @@ echo -e "${NC}[${GREEN}+${NC}] ${GREEN}Finished processing ZEUS feed!${NC}";
 echo -e "${NC}[${GREEN}+${NC}] ${GREEN}Total IP-addresses in this feed: ${TOTAL}${NC}";
 sudo sort -nu -t. -k1 -k2 -k3 -k4  '/opt/custom/blockscript/output/zeus.txt' -o '/opt/custom/blockscript/output/zeus.txt'
 rm /opt/custom/blockscript/processing/tempblocklist.txt;
-#rm /opt/custom/blockscript/processing/blocklist.php*
