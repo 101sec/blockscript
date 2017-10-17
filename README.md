@@ -6,7 +6,7 @@ Network packets entering or leaving a networked Linux computer pass a number of 
 https://www.lammertbies.nl/comm/info/iptables.html
 
 # How to install blockscript?
-First of all we need to install a package called iptables. 
+First of all we need to install a package called iptables. On debian-like distro's we can do so by entering the following command:
 
 sudo apt-get install iptables-persistent; 
 
@@ -43,6 +43,11 @@ Blockscript consists of two parts. The first part fetches threat information fro
 ./add_enemies - Adds all IP-addresses from the retrieved feeds to the blocklist.
 ./addenemy <IP-ADDRESS> - Adds a single IP-address to the blocklist. 
 
+First of all, we need to request an API key from Autoshun. You may do so here:
+
+https://www.autoshun.org/register/
+
+Copy the API key to /opt/custom/blocklist/fetch_autoshun.sh, and paste at line 7, look for <APIKEY>.   
 
 # Add a cronjob to fetch feeds automatically
 
