@@ -54,7 +54,7 @@ sudo ./fetch_feeds - Fetches feeds from Zeus Tracker, Autoshun and others.
 sudo ./add_enemies - Adds all IP-addresses from the retrieved feeds to the blocklist.
 ```
 ```
-sudo ./addenemy [IP-ADDRESS] - Adds a single IP-address to the blocklist. 
+sudo ./addenemy [IP-Address] - Adds a single IP-address to the blocklist. 
 ```
 First of all, we need to request an API key from Autoshun. You may do so here: https://www.autoshun.org/register/
 
