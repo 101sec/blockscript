@@ -46,15 +46,15 @@ sudo mv /opt/custom/blockscript/addenemy /usr/local/bin/
 # How to use blockscript?
 Blockscript consists of two parts. The first part fetches threat information from public feeds, while the add_enemies.sh script adds them to the blocklist of our firewall configuration. Blockscript is flexible by design and can be used manually or configured to work fully automated in the background. 
 
-./fetch_feeds - Fetches feeds from Zeus Tracker, Autoshun and others.
+sudo ./fetch_feeds - Fetches feeds from Zeus Tracker, Autoshun and others.
 
-./add_enemies - Adds all IP-addresses from the retrieved feeds to the blocklist.
+sudo ./add_enemies - Adds all IP-addresses from the retrieved feeds to the blocklist.
 
-./addenemy <IP-ADDRESS> - Adds a single IP-address to the blocklist. 
+sudo ./addenemy <IP-ADDRESS> - Adds a single IP-address to the blocklist. 
 
 First of all, we need to request an API key from Autoshun. You may do so here: https://www.autoshun.org/register/
 
-Copy the API key to /opt/custom/blocklist/fetch_autoshun.sh, and paste at line 7, look for [APIKEY].   
+Copy the API key to /opt/custom/blocklist/fetch_autoshun.sh, and paste at line 7, look for [APIKEY].    
 
 # Add a cronjob to fetch feeds automatically
 
@@ -67,3 +67,11 @@ Add the following lines:
 30 23 * * * /opt/custom/blockscript/add_enemies.sh
 
 Per this entry, cron will frequently fetch the latest info without DOS'ing the servers and run add_enemies.sh at 23:30 (11.30pm) once a day, every day. 
+
+To further simplefy things we could create a bash alias in ~/.bashrc or ~/.bash_profile
+
+alias block='/usr/local/bin/addenemy'
+
+To block an IP-address from the terminal, we could simply issue:
+
+block <IP-Address>
