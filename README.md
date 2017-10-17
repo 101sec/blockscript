@@ -1,5 +1,5 @@
 # Why did I decide to write blockscript?
-The blockscript project was designed to help Linux users with a more secure alternative to their consumer router or software firewall. More advanced users may be interested in using this project in addition to other tools to protect their Network Security Management or SIEM environment. Blockscript integrates for instance rather nicely with projects such as SELKS or Alienvault OSSIM. Below is a screenshot of a SELKS environment.
+The blockscript project was designed to help Linux users with a more secure alternative to their consumer router or software firewall. More advanced users may be interested in using this project in addition to other tools to protect their Network Security Management or SIEM environment. Blockscript integrates for instance rather nicely with projects such as SELKS or Alienvault OSSIM. Below is a screenshot of blockscript running in a SELKS environment.
 
 ![alt text](https://raw.githubusercontent.com/101sec/blockscript/master/screenshot/blockscript.PNG)
 
