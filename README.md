@@ -74,4 +74,4 @@ alias block='/usr/local/bin/addenemy'
 
 To block an IP-address from the terminal, we could simply issue:
 
-block <IP-Address>
+block [IP-Address]
